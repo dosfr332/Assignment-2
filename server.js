@@ -7,6 +7,25 @@ const image_router = require('./routers/image_router');
 /* load .env */
 dotenv.config();
 
+// Database
+const mongoose = require("mongoose");
+const { rmSync } = require('fs');
+const user = process.env.ATLAS_USER;
+const password = process.env.ATLAS_PASSWORD;
+const db_name = 'Ass-2';
+const db_url = `mongodb+srv://${user}:${password}@cluster0.yrzfub1.mongodb.net/?retryWrites=true&w=majority/${db_name}`
+const options = {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+}
+mongoose.connect(db_url, options).then(() => {
+    console.log('successfully connected!')
+}).catch((e) => {
+    console.error(e, 'could not connect!')
+});
+
+
+
 /* create Express app */
 const app = express();
 
