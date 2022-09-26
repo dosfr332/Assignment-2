@@ -1,0 +1,15 @@
+.img {
+    width: 55%;
+    margin: 4%;
+    margin-bottom: 6%
+}
+
+.bod4 {
+    display: block;
+    text-align: center; 
+}
+.not_found_headder{
+    margin-top: 2%;
+    margin-bottom: -0.2em;
+    font-size: 2em;
+}

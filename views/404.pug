@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+    head
+        title COSC203: Birds of Aotearoa
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='/styles/layout.css')
+        link(rel='stylesheet', href='/styles/theme.css')
+        link(rel='stylesheet', href='/styles/404_stuff.css')
+        link(rel='stylesheet', href='/styles/cards.css')
+        script(defer, src='/scripts/populate_form.js')
+    include templates/header.pug
+    body(class='bod4')
+        div(class='not_found_bod')
+            h1(class ='not_found_headder') Sorry something is missing
+            h2 Did you take a wrong turn?
+            img(src=`/images/404_img.jpeg`, class='img')
+            
+    include templates/footer.pug

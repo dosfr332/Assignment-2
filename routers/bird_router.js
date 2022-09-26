@@ -1,6 +1,7 @@
 const express = require('express');
 var bird_controller = require('../controllers/bird_controller');
 
+
 /* create a router (to export) */
 const router = express.Router();
 
@@ -10,10 +11,10 @@ router.get('/', async (req, res) => {
     const search = req.query.search;
     const status = req.query.status;
     const sort = req.query.sort;
-
+    const b = await bird_controller.filter_bird_data(search, status, sort);
     // render the Pug template 'home.pug' with the filtered data
     res.render('home', {
-        birds: bird_controller.filter_bird_data(search, status, sort)
+        birds: b
     });
 })
 

@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const bird_router = require('./routers/bird_router');
 const image_router = require('./routers/image_router');
+const Birds = require('./models/birds');
 
 /* load .env */
 dotenv.config();
@@ -13,7 +14,7 @@ const { rmSync } = require('fs');
 const user = process.env.ATLAS_USER;
 const password = process.env.ATLAS_PASSWORD;
 const db_name = 'Ass-2';
-const db_url = `mongodb+srv://${user}:${password}@cluster0.yrzfub1.mongodb.net/?retryWrites=true&w=majority/${db_name}`
+const db_url = `mongodb+srv://${user}:${password}@cluster0.yrzfub1.mongodb.net/${db_name}`
 const options = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -23,8 +24,6 @@ mongoose.connect(db_url, options).then(() => {
 }).catch((e) => {
     console.error(e, 'could not connect!')
 });
-
-
 
 /* create Express app */
 const app = express();
@@ -40,6 +39,13 @@ app.set('view engine', 'pug');
 app.use('/images/', image_router);
 app.use('/', express.static(path.resolve(__dirname, 'public/')));
 
+
+app.get('/api/all-birds', async (req, res) => {
+    const birds = await Birds.find({});
+    console.log(birds);
+    res.json(birds);
+});
+
 /* redirect root route `/` to `/birds/` */
 app.get('/', (req, res) => {
     res.redirect('/birds/');
@@ -48,8 +54,10 @@ app.get('/', (req, res) => {
 app.use('/birds/', bird_router);
 
 // TODO: 404 page
-
-// TODO: connect to a database
+app.get('*', (req, res) => {
+    res.status(404);
+    res.render('404');
+});
 
 /* start the server */
 const PORT = process.env.PORT;
