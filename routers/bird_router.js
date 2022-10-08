@@ -120,7 +120,85 @@ router.post('/api/upload', upload.single('myFile'), async function (req, res) {
 
 
 // TODO: Update bird route(s)
+router.get('/update', async (req, res) => {
+    var id = req.query.id;
+    const b = await bird_controller.individual_bird(id);
+    for (i = 1; i < b.other_names.length; i++){
+        b.other_names[i] = " " + b.other_names[i]
+    }
+    res.render('update',{ bird: b
+    })
+});
 
+router.post('/api/update', upload.single('myFile'), async (req, res) => {
+    //var bird_document;
+    var db_info;
+    var file = req.file;
+    var data = req.body
+    var id = req.query.id;
+    const b = await bird_controller.individual_bird(id);
+    var other_arr = data.othname.split(", ");
+    //console.log(file)
+
+    if(data.status == "..."){
+        data.status = b.status;
+    }
+
+    if (file != undefined) {
+        db_info = await birds.updateOne(
+            { _id: id },
+            { primary_name: data.pname,
+            english_name: data.ename,
+            scientific_name: data.sname,
+            order: data.ordname,
+            family: data.fname,
+            other_names: other_arr,
+            status: data.status,
+            photo: {
+                credit: data.credit,
+                source: file.filename
+            },
+            size: {
+                length: {
+                    value: data.length,
+                    units: 'cm'
+                },
+                weight: {
+                    value: data.weight,
+                    units: 'g'
+                }
+            }
+        })
+    } else {
+        db_info = await birds.updateOne(
+            { _id: id },
+            { primary_name: data.pname,
+            english_name: data.ename,
+            scientific_name: data.sname,
+            order: data.ordname,
+            family: data.fname,
+            other_names: other_arr,
+            status: data.status,
+            photo: {
+                credit: data.credit,
+                source: b.photo.source,
+            },
+            size: {
+                length: {
+                    value: data.length,
+                    units: 'cm'
+                },
+                weight: {
+                    value: data.weight,
+                    units: 'g'
+                }
+            }
+        })
+    }
+    console.log(id)
+    console.log(db_info, '/api/update-message response');
+    res.redirect("/")
+});
 
 // TODO: Delete bird route(s)
 router.post('/api/delete-bird', async (req, res) => {

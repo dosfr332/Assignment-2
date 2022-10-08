@@ -14,26 +14,26 @@ html(lang='en')
     body(class='bod4')
         include templates/header.pug
         
-        h1 Welcome to build a bird!
+        h1 Update a bird!
         div(class='content')    
-            form(ref='create_bird', id='create_bird', action='http://localhost:440/birds/api/upload', method='POST', encType="multipart/form-data")
+            form(ref='create_bird', id='create_bird', action=`http://localhost:440/birds/api/update/?id=${bird._id}`, method='POST', encType="multipart/form-data")
                 h4 * required feilds
                 h3 Names:
                 h5 Primary name *
-                input(type='text' name='pname' placeholder="name...", class="text_input", class="required", id="prm", required)
+                input(type='text' name='pname' value=`${bird.primary_name}`, class="text_input", class="required", id="prm", required)
                 h5 English name *
-                input(type='text' name='ename' placeholder="name...", class="text_input", class="required", id="eng", required)
+                input(type='text' name='ename' value=`${bird.english_name}`, class="text_input", class="required", id="eng", required)
                 h5 Scientific name * 
-                input(type='text' name='sname' placeholder="name...", class="text_input", class="required", id="sci", required)
+                input(type='text' name='sname' value=`${bird.scientific_name}`, class="text_input", class="required", id="sci", required)
                 h5 Family name *
-                input(type='text' name='fname' placeholder="name...", class="text_input", class="required", id="fam", required)
+                input(type='text' name='fname' value=`${bird.family}`, class="text_input", class="required", id="fam", required)
                 h5 Order name
-                input(type='text' name='ordname' placeholder="name...", class="text_input", id="ord")
+                input(type='text' name='ordname' value=`${bird.order}`, class="text_input", id="ord")
                 h5 Other names (comma separated)
-                input(type='text' name='othname' placeholder="name...", class="text_input", id="other")
+                input(type='text' name='othname' value=`${bird.other_names}`, class="text_input", id="other")
                 h3 Status: * 
                 select(name='status' id='status', required)
-                    option(selected)
+                    option(selected) ...
                     option(class="Not-Threatened") Not Threatened
                     option(class="Naturally-Uncommon") Naturally Uncommon
                     option(class="Relict") Relict
@@ -46,15 +46,15 @@ html(lang='en')
                     option(class="Data-Deficient") Data Deficient
                 h3 Photo:
                 h5 Credit *
-                input(type='text' name='credit' placeholder="Credit...", class="text_input" , class="required", id="cred", required) 
+                input(type='text' name='credit' value=`${bird.photo.credit}`, class="text_input" , class="required", id="cred", required) 
                 h5 Photo upload
                 input(type='file' name="myFile", id="upload")
                 h3(class="size_h") Size: 
                 h5 weight (g) *
-                input(type='number' name='weight' placeholder="...", class="num_input" , class="required", id="wei",, required)
+                input(type='number' name='weight' value=`${bird.size.weight.value}`, class="num_input" , class="required", id="wei",, required)
                 h5 Length (cm) *
-                input(type='number' name='length' placeholder="...", class="num_input", class="required", id="len", required)
-                button(type='submit') Create
+                input(type='number' name='length' value=`${bird.size.length.value}`, class="num_input", class="required", id="len", required)
+                button(type='submit') Update
                 
 
             
