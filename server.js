@@ -1,9 +1,11 @@
-const dotenv = require('dotenv')
+const dotenv = require('dotenv');
 const path = require('path');
 const express = require('express');
 const bird_router = require('./routers/bird_router');
 const image_router = require('./routers/image_router');
 const Birds = require('./models/birds');
+const multer = require('multer')
+
 
 /* load .env */
 dotenv.config();
@@ -33,8 +35,12 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 // TODO: middleware for parsing POST body
+const bodyParser = require('body-parser');
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: false })); // Support encoded bodies
+app.use(bodyParser.json([options]));
 // TODO: middleware for uploading files
-
+const upload = multer({ dest: __dirname + '/images/' })
 /* host static resources (.css, .js, ...) */
 app.use('/images/', image_router);
 app.use('/', express.static(path.resolve(__dirname, 'public/')));

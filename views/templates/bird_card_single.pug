@@ -1,0 +1,46 @@
+section(class='card', id="blur")
+    div(class="card-image")
+        div(class='options')    
+            div(class='dropdown')
+                a(href=`http://localhost:440/update/?id=${bird._id}`)
+                    img(src=`/images/edit_logo.png`, class="CRUD_img")
+            div(class="dropdown")
+                a(href='#', onclick="toggle()")
+                    img(src=`/images/Delete_icon.png`, class="CRUD_img")
+        
+        img(src=`/images/${bird.photo.source}` alt=`Photo of ${bird.primary_name}`)
+        
+        div(class="card-title")
+            p(lang="mi") #{bird.primary_name}
+            span Photo by #{bird.photo.credit}
+        div(class=`circle ${bird.status.replace(' ', '-')}`)
+        
+    div(class="card-content")
+        h2(class="card-title") 
+        ul
+            li
+                b Scientific
+                span=bird.scientific_name
+            li
+                b Family
+                span=bird.family
+            li
+                b Order 
+                span=bird.order
+            li
+                b Status 
+                span=bird.status
+            li
+                b Length 
+                span=`${bird.size.length.value} ${bird.size.length.units}`
+            li
+                b Weight 
+                span=`${bird.size.weight.value} ${bird.size.weight.units}`
+div(id="popup")
+    h2 Are you sure you want to delete this Bird?
+    p This action is permanent (not really)
+    
+    //-form(action=`/birds/?id=${bird._id}/delete`) 
+    button(onclick='deleteBird("' + bird._id +'")') Delete
+    
+    button(onclick="toggle()") Cancel 

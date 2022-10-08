@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+    head
+        title COSC203: Birds of Aotearoa
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='stylesheet', href='/styles/layout.css')
+        link(rel='stylesheet', href='/styles/theme.css')
+        link(rel='stylesheet', href='/styles/conservation-status.css')
+        link(rel='stylesheet', href='/styles/404_stuff.css')
+        link(rel='stylesheet', href='/styles/cards.css')
+        link(rel='stylesheet', href='/styles/CRUD.css')
+        script(href='/scripts/script.js')
+        script(src='/scripts/CRUD_stufff.js')
+    
+    
+    body(class='bod4')
+        include templates/header.pug
+        main
+            include templates/bird_card_single.pug
+        include templates/footer.pug

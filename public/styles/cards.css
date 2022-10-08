@@ -5,6 +5,7 @@
     border-radius: 5px;
     flex-grow: 1;
     flex-basis: 250px;
+    max-width: 40%;
 }
 .card-image {
     position: relative;
@@ -31,11 +32,17 @@
     padding-left: 20px;
     color: white;
 }
+.card-title{
+    text-align: left;
+}
+
 .card-image .card-title p {
     position: absolute;
     font-size: x-large;
-    bottom:8px;
+    bottom:8px; 
 }
+
+
 .card-image .card-title span {
     position: absolute;
     font-size: small;
@@ -59,4 +66,9 @@
 }
 .card li span {
     width: calc(100% - 6em);
+}
+.card-link{
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333333;
+    text-decoration: none;
 }

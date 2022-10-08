@@ -1,0 +1,56 @@
+.dropdown {
+    background-color: #E8E7E7;
+    opacity: 0.4;
+    margin: 10px;
+    border-radius: 30px;
+    max-height: 45px;
+    max-width: 45px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.dropdown:hover {
+    background-color: #E8E7E7;
+    opacity: 0.6;
+}
+
+.options {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 4;
+
+}
+
+.CRUD_img {
+    width: 68%;
+    margin: 5px;
+}
+
+.card#blur.active {
+    filter: blur(20px);
+    pointer-events: none;
+    user-select: none;
+}
+
+#popup {
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height:40%;
+    padding: 2em;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.30);
+    background: #fff;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+#popup.active {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+    top: 50%;
+}

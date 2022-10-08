@@ -8,6 +8,7 @@ html(lang='en')
         link(rel='stylesheet', href='/styles/theme.css')
         link(rel='stylesheet', href='/styles/conservation-status.css')
         link(rel='stylesheet', href='/styles/cards.css')
+        link(rel='stylesheet', href='/styles/create.css')
         script(defer, src='/scripts/populate_form.js')
     body
         include templates/header.pug
@@ -17,4 +18,8 @@ html(lang='en')
         main
             each bird in birds
                 include templates/bird_card.pug
+            div(class='options') 
+                a(href=`http://localhost:440/birds/create`)
+                    div(class='dropdown')
+                        img(src=`/images/create_icon.png`, class="CRUD_img", id="create")
         include templates/footer.pug

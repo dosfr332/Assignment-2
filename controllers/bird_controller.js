@@ -7,7 +7,7 @@ async function filter_bird_data(search, status, sort) {
     // var results = birds;
     //var results = birds_json;
     var results = await Birds.find({});
-    
+
     // filter by conservation status 
     if (status !== undefined && status !== "All") {
         results = results.filter((b) => b.status == status);
@@ -23,4 +23,14 @@ async function filter_bird_data(search, status, sort) {
     return results;
 }
 
-module.exports = { filter_bird_data };
+async function individual_bird(id) {
+    var results = await Birds.find({});
+
+    for (i = 0; i < results.length; i++) {
+        if (results[i]._id == id) {
+            return results[i];
+        }
+    }
+}
+
+module.exports = { filter_bird_data, individual_bird };

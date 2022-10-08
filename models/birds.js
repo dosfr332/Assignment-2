@@ -31,11 +31,11 @@ const birdSchema = new mongoose.Schema({
     size: {
         length: {
             value: { type: Number, required: true },
-            units: { type: String, required: true }
+            units: { type: String, default: 'cm'}
         },
         weight: {
             value: { type: Number, required: true },
-            units: { type: String, required: true }
+            units: { type: String, default: 'g'}
         }
     }
 
